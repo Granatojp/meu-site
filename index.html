@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sport Clube Corinthians Paulista</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        section {
+            padding: 20px 0;
+        }
+        #about {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        #history, #fans-stories {
+            background: #e2e2e2;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        footer {
+            background-color: #000;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+        .story-form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        .story-form input, .story-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .story-form button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .story-form button:hover {
+            background: #444;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sport Clube Corinthians Paulista</h1>
+    </header>
+    <nav>
+        <a href="#about">Sobre o Clube</a>
+        <a href="#history">História</a>
+        <a href="#fans-stories">Histórias dos Torcedores</a>
+    </nav>
+    <div class="container">
+        <section id="about">
+            <h2>Sobre o Clube</h2>
+            <p>O Sport Club Corinthians Paulista, conhecido popularmente como Corinthians, é um dos clubes de futebol mais importantes e tradicionais do Brasil. Fundado em 1910, o clube possui uma história rica e uma torcida apaixonada.</p>
+        </section>
+        <section id="history">
+            <h2>História</h2>
+            <p>O Corinthians foi fundado em 1 de setembro de 1910 por um grupo de operários. Desde então, o clube se destacou em diversas competições, tanto nacionais quanto internacionais. O Corinthians conquistou vários títulos, incluindo o Campeonato Brasileiro, a Copa do Brasil e a Copa Libertadores da América.</p>
+            <div>
+                <h3>Galeria de Fotos</h3>
+                <p>Aqui, você pode incluir uma galeria de fotos histórica do clube.</p>
+            </div>
+            <div>
+                <h3>Vídeos Memoráveis</h3>
+                <p>Aqui, você pode incluir vídeos históricos do clube.</p>
+            </div>
+        </section>
+        <section id="fans-stories">
+            <h2>Histórias dos Torcedores</h2>
+            <p>Compartilhe sua história de amor com o Corinthians. Envie suas fotos e vídeos para que todos possam ver!</p>
+            <div class="story-form">
+                <form id="fanStoryForm">
+                    <label for="name">Nome:</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="story">Sua História:</label>
+                    <textarea id="story" name="story" rows="5" required></textarea>
+                    <label for="photos">Fotos:</label>
+                    <input type="file" id="photos" name="photos" accept="image/*" multiple>
+                    <label for="videos">Vídeos:</label>
+                    <input type="file" id="videos" name="videos" accept="video/*" multiple>
+                    <button type="submit">Enviar História</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>&copy; 2024 Sport Clube Corinthians Paulista. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        document.getElementById('fanStoryForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('História enviada com sucesso!');
+        });
+    </script>
+</body>
+</html>
