@@ -1,141 +1,114 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sport Clube Corinthians Paulista</title>
+    <title>Pelada dos Amigos</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #000;
-            color: #fff;
-            padding: 20px 0;
-            text-align: center;
-        }
-        nav {
-            background-color: #333;
-            padding: 10px 0;
-            text-align: center;
-        }
-        nav a {
-            color: #fff;
-            margin: 0 15px;
-            text-decoration: none;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        section {
-            padding: 20px 0;
-        }
-        #about {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        #history, #fans-stories {
-            background: #e2e2e2;
-            padding: 20px;
-            border-radius: 8px;
-            margin: 20px 0;
-        }
-        footer {
-            background-color: #000;
-            color: #fff;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: 20px;
-        }
-        .story-form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-        .story-form input, .story-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-        .story-form button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background: #000;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .story-form button:hover {
-            background: #444;
-        }
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #admin { display: none; }
+        .hidden { display: none; }
+        .team { margin-top: 20px; padding: 10px; border: 1px solid black; display: inline-block; width: 45%; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Sport Clube Corinthians Paulista</h1>
-    </header>
-    <nav>
-        <a href="#about">Sobre o Clube</a>
-        <a href="#history">História</a>
-        <a href="#fans-stories">Histórias dos Torcedores</a>
-    </nav>
-    <div class="container">
-        <section id="about">
-            <h2>Sobre o Clube</h2>
-            <p>O Sport Club Corinthians Paulista, conhecido popularmente como Corinthians, é um dos clubes de futebol mais importantes e tradicionais do Brasil. Fundado em 1910, o clube possui uma história rica e uma torcida apaixonada.</p>
-        </section>
-        <section id="history">
-            <h2>História</h2>
-            <p>O Corinthians foi fundado em 1 de setembro de 1910 por um grupo de operários. Desde então, o clube se destacou em diversas competições, tanto nacionais quanto internacionais. O Corinthians conquistou vários títulos, incluindo o Campeonato Brasileiro, a Copa do Brasil e a Copa Libertadores da América.</p>
-            <div>
-                <h3>Galeria de Fotos</h3>
-                <p>Aqui, você pode incluir uma galeria de fotos histórica do clube.</p>
-            </div>
-            <div>
-                <h3>Vídeos Memoráveis</h3>
-                <p>Aqui, você pode incluir vídeos históricos do clube.</p>
-            </div>
-        </section>
-        <section id="fans-stories">
-            <h2>Histórias dos Torcedores</h2>
-            <p>Compartilhe sua história de amor com o Corinthians. Envie suas fotos e vídeos para que todos possam ver!</p>
-            <div class="story-form">
-                <form id="fanStoryForm">
-                    <label for="name">Nome:</label>
-                    <input type="text" id="name" name="name" required>
-                    <label for="story">Sua História:</label>
-                    <textarea id="story" name="story" rows="5" required></textarea>
-                    <label for="photos">Fotos:</label>
-                    <input type="file" id="photos" name="photos" accept="image/*" multiple>
-                    <label for="videos">Vídeos:</label>
-                    <input type="file" id="videos" name="videos" accept="video/*" multiple>
-                    <button type="submit">Enviar História</button>
-                </form>
-            </div>
-        </section>
+    <h2>Organizador de Pelada</h2>
+
+    <div id="gameInfo">
+        <p><strong>Dia:</strong> <span id="gameDate"></span></p>
+        <p><strong>Horário:</strong> <span id="gameTime"></span></p>
+        <p><strong>Local:</strong> <span id="gameLocation"></span></p>
+        <p><strong>Número de jogadores:</strong> <span id="playerLimit"></span></p>
     </div>
-    <footer>
-        <p>&copy; 2024 Sport Clube Corinthians Paulista. Todos os direitos reservados.</p>
-    </footer>
+
+    <h3>Jogadores Confirmados</h3>
+    <ul id="players"></ul>
+
+    <h3>Lista de Espera</h3>
+    <ul id="waitingList"></ul>
+
+    <button onclick="sortTeams()">Sortear Times</button>
+
+    <div id="teams" class="hidden">
+        <div class="team">
+            <h3>Time 1</h3>
+            <ul id="team1"></ul>
+        </div>
+        <div class="team">
+            <h3>Time 2</h3>
+            <ul id="team2"></ul>
+        </div>
+    </div>
+
+    <div id="admin">
+        <h3>Configurar Jogo</h3>
+        <label>Dia: <input type="date" id="inputDate"></label><br>
+        <label>Horário: <input type="time" id="inputTime"></label><br>
+        <label>Local: <input type="text" id="inputLocation"></label><br>
+        <label>Número de jogadores: <input type="number" id="inputLimit" min="2"></label><br>
+        
+        <h3>Adicionar Jogadores</h3>
+        <input type="text" id="playerName" placeholder="Nome do jogador">
+        <button onclick="addPlayer()">Adicionar</button>
+        
+        <button onclick="saveGame()">Salvar Jogo</button>
+    </div>
 
     <script>
-        document.getElementById('fanStoryForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('História enviada com sucesso!');
-        });
+        let players = [];
+        let waitingList = [];
+        let playerLimit = 10;
+        const adminCode = "1234"; // Código para edição
+
+        function addPlayer() {
+            const name = document.getElementById("playerName").value.trim();
+            if (!name) return;
+            if (players.length < playerLimit) {
+                players.push(name);
+                updateLists();
+            } else {
+                waitingList.push(name);
+                updateLists();
+            }
+            document.getElementById("playerName").value = "";
+        }
+
+        function updateLists() {
+            document.getElementById("players").innerHTML = players.map(p => `<li>${p}</li>`).join("");
+            document.getElementById("waitingList").innerHTML = waitingList.map(p => `<li>${p}</li>`).join("");
+        }
+
+        function sortTeams() {
+            if (players.length < playerLimit) {
+                alert("Ainda não há jogadores suficientes!");
+                return;
+            }
+            const shuffled = [...players].sort(() => Math.random() - 0.5);
+            const team1 = shuffled.slice(0, shuffled.length / 2);
+            const team2 = shuffled.slice(shuffled.length / 2);
+
+            document.getElementById("team1").innerHTML = team1.map(p => `<li>${p}</li>`).join("");
+            document.getElementById("team2").innerHTML = team2.map(p => `<li>${p}</li>`).join("");
+
+            document.getElementById("teams").classList.remove("hidden");
+        }
+
+        function saveGame() {
+            document.getElementById("gameDate").innerText = document.getElementById("inputDate").value;
+            document.getElementById("gameTime").innerText = document.getElementById("inputTime").value;
+            document.getElementById("gameLocation").innerText = document.getElementById("inputLocation").value;
+            playerLimit = parseInt(document.getElementById("inputLimit").value) || 10;
+            document.getElementById("playerLimit").innerText = playerLimit;
+        }
+
+        function checkAdmin() {
+            const code = prompt("Digite o código de administrador:");
+            if (code === adminCode) {
+                document.getElementById("admin").style.display = "block";
+            }
+        }
+
+        checkAdmin(); // Pede o código ao abrir a página
     </script>
 </body>
 </html>
